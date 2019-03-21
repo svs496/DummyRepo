@@ -1,0 +1,9 @@
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\LoggerService\bin\Debug\netcoreapp2.2\LoggerService.deps.json
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\LoggerService\bin\Debug\netcoreapp2.2\LoggerService.dll
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\LoggerService\obj\Debug\netcoreapp2.2\LoggerService.csproj.CoreCompileInputs.cache
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\LoggerService\obj\Debug\netcoreapp2.2\LoggerService.AssemblyInfoInputs.cache
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\LoggerService\obj\Debug\netcoreapp2.2\LoggerService.AssemblyInfo.cs
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\LoggerService\bin\Debug\netcoreapp2.2\LoggerService.pdb
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\LoggerService\obj\Debug\netcoreapp2.2\LoggerService.dll
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\LoggerService\obj\Debug\netcoreapp2.2\LoggerService.pdb
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\LoggerService\obj\Debug\netcoreapp2.2\LoggerService.csprojAssemblyReference.cache

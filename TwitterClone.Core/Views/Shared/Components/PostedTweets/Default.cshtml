@@ -1,0 +1,25 @@
+﻿@model IEnumerable<TwitterClone.Core.Models.ViewModels.TweetViewModel>
+
+
+@foreach (var item in Model)
+{
+
+    <div class="Grid-cell panel panel-primary" style="margin-top:5px; width:720px">
+        <div class="card">
+            <h4 class="card-header">Posted&nbsp;by&nbsp;@item.UserName&nbsp;on&nbsp;@item.DisplayCreateDate</h4>
+            @if (item.DisplayModifedDate != null)
+            {
+                <h5 class="card-header">Modifed&nbsp;at&nbsp;@item.DisplayModifedDate</h5>
+            }
+            <div class="card-body">
+
+                <p class="card-text">@item.Content</p>
+
+                <div style="margin-top:10px;text-align:right">
+                    <a href="#" class="card-link">Edit</a>
+                    <a href="#" class="card-link">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

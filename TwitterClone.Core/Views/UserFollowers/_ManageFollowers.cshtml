@@ -1,0 +1,64 @@
+﻿@model IEnumerable<TwitterClone.Core.Models.ViewModels.UserTweetViewModel>
+
+
+<div class="card-group">
+    @foreach (var item in Model)
+    {
+        <div class="Grid-cell panel panel-primary" style="margin-top:5px; margin-left:5px; width:300px">
+            <div class="card border-success mb-3">
+                <div class="card-header  border-primary">
+                    <div style="display:flex;align-items:center">
+                        @if (item.FollowFlag)
+                        {
+                            <img src="~/images/ThumbsUp.png" style="width:auto;height:50px; float:left;margin-right:1px;" />
+                        }
+                        else
+                        {
+                            <img src="~/images/ThumbsDown.png" style="width:auto;height:50px; float:left;margin-right:1px;" />
+                        }
+                        <h4 style="font-size:large; font-family:Calibri;color:indigo;vertical-align:middle; font-weight:bolder">@item.UserFullName</h4>
+                    </div>
+
+                </div>
+                <div class="card-body text-danger">
+
+                    <div class="memberBioStats">
+                        <div>
+                            <strong>Location</strong>   <p class="card-text memberLineItem">@item.UserLocation</p>
+                        </div>
+                        <div>
+                            <strong>BirthDay</strong>  <p class="card-text memberLineItem">@item.UserBirthDay</p>
+                        </div>
+
+                    </div>
+                    <div class="memberBioStats">
+                        <div>
+                            <strong>Tweet Count</strong>   <p class="card-text memberLineItem">@item.TotalTweetCount</p>
+                        </div>
+                        <div>
+                            <strong>Followers</strong>   <p class="card-text memberLineItem">@item.FollowersCount</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    @if (item.FollowFlag)
+                    {
+                        <a class="EdgeButton EdgeButton--danger EdgeButton--small"
+                           onclick='UnFollowUser(this)' data-followingusr="@item.UserId"><i class="fas fa-user-minus"></i>&nbsp;&nbsp;UnFollow User</a>
+                    }
+                    else
+                    {
+                        <a class="EdgeButton EdgeButton--primary EdgeButton--small" style="background-color:darkcyan"
+                           onclick="FollowUser(this)" data-followingusr="@item.UserId"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Follow User</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+<script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

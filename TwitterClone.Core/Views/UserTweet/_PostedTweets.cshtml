@@ -1,0 +1,49 @@
+﻿@model IEnumerable<TwitterClone.Core.Models.ViewModels.TweetViewModel>
+
+
+
+
+
+<div class="card-group">
+    @foreach (var item in Model)
+    {
+        <div class="Grid-cell panel panel-primary" style="margin-top:5px; margin-left:5px; width:400px">
+
+            <div class="card border-success mb-3">
+                <div class="card-header border-primary postedTweetHeader">
+                    <div style="display:flex;align-items:center">
+                        <img src="~/images/TwitterS.png" style="width:30px;height:30px; float:left" />
+                        <h4 style="font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif; font-style:italic;font-size:12px">First Posted&nbsp;by&nbsp;<strong>@item.UserName</strong>&nbsp;on&nbsp;@item.DisplayCreateDate</h4>
+                    </div>
+                </div>
+                <div class="card-body postedTweet">
+
+                    <p class="card-text">@item.Content</p>
+
+                </div>
+
+                @if (item.DisplayModifedDate != null)
+                {
+                    <div class="modifiedCardHeader card-header">
+                        <h4 style="font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif; font-style:italic;font-size:12px">Modifed&nbsp;on&nbsp;@item.DisplayModifedDate</h4>
+                    </div>
+                }
+                <div class="card-footer">
+                    @if (item.OwnTweet)
+                    {
+                    @*<a asp-action="ModalEdit" asp-route-id="@item.Id" class="EdgeButton EdgeButton--primary EdgeButton--small" data-modal="editTweets"><i class="fa fa-edit"></i>Edit</a>*@
+
+                    <a class="EdgeButton EdgeButton--primary EdgeButton--small" onclick="FunctionEditTweet(@item.Id)"><i class="fa fa-edit"></i>Edit</a>
+
+                    <button type="button" class="EdgeButton EdgeButton--danger EdgeButton--small" data-toggle="modal" data-target="#deleteModal" data-whatever=@item.Id><i class="fa fa-trash"></i>Delete</button>
+                    }
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+<script>
+   
+</script>

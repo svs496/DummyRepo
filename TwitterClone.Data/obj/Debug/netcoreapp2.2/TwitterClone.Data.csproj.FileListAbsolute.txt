@@ -1,0 +1,9 @@
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\TwitterClone.Data\bin\Debug\netcoreapp2.2\TwitterClone.Data.deps.json
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\TwitterClone.Data\bin\Debug\netcoreapp2.2\TwitterClone.Data.dll
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\TwitterClone.Data\bin\Debug\netcoreapp2.2\TwitterClone.Data.pdb
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\TwitterClone.Data\obj\Debug\netcoreapp2.2\TwitterClone.Data.csproj.CoreCompileInputs.cache
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\TwitterClone.Data\obj\Debug\netcoreapp2.2\TwitterClone.Data.AssemblyInfoInputs.cache
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\TwitterClone.Data\obj\Debug\netcoreapp2.2\TwitterClone.Data.AssemblyInfo.cs
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\TwitterClone.Data\obj\Debug\netcoreapp2.2\TwitterClone.Data.dll
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\TwitterClone.Data\obj\Debug\netcoreapp2.2\TwitterClone.Data.pdb
+C:\Users\sbhatia\Desktop\desktop items\1.FSE\Assignment 20-Twitter\TwitterClone.Data\obj\Debug\netcoreapp2.2\TwitterClone.Data.csprojAssemblyReference.cache

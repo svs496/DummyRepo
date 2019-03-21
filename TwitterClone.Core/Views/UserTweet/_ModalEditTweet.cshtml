@@ -1,0 +1,52 @@
+﻿@model TwitterClone.Core.Models.ViewModels.TweetViewModel
+
+
+@{
+    Layout = null;
+
+}
+
+
+
+<div class="modal-body">
+    <form asp-action="ModalEdit" asp-controller="UserTweet" id="EditTweetForm" data-ajax="true"
+          data-ajax-method="POST" method="post" data-ajax-complete="onCompleteEdit">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="UserId" />
+        <input type="hidden" asp-for="CreateDate" />
+        <div class="Grid-cell">
+            <textarea rows="3" asp-for="Content" id="field2"
+                      style="margin-top:10px; width:100%;border-radius: 10px;box-shadow: 0 0 0 2px #000;border: 2px solid transparent"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+            <div id="charNum2" style="color:red;font-size:small;font-style:italic;margin-top:2px">*@(140 - Model.Content.Length) characters left</div>
+        </div>
+
+        <div class="Grid-cell" style="margin-top:5px">
+            <span class="button-text follow-text">
+                <button class="EdgeButton EdgeButton--primary" type="submit" id="mybutton">
+                    Update <i class="fab fa-twitter-square"></i>
+                </button>
+            </span>
+            <a class="EdgeButton EdgeButton--secondary" data-dismiss="modal"><i class="fas fa-window-close"> Cancel</i></a>
+        </div>
+
+    </form>
+</div>
+
+<script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    $('#field2').keyup(function () {
+       
+        var max = 140;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $('#charNum2').text('you have reached the limit');
+        } else {
+            var char = max - len;
+            $('#charNum2').text(char + ' characters left');
+        }
+    });
+</script>

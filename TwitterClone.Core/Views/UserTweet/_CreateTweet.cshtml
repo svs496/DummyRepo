@@ -1,0 +1,32 @@
+﻿@model TwitterClone.Core.Models.ViewModels.TweetViewModel
+
+<form asp-action="CreateTweet" asp-controller="UserTweet" data-ajax="true"
+      data-ajax-method="POST" method="post" data-ajax-complete="onComplete">
+    @Html.AntiForgeryToken()
+    <div class="Grid-cell">
+        <textarea rows="2" asp-for="Content"  id="field"
+                  style="margin-top:10px; width:95%; font-size:large; color:firebrick;
+                    border-radius: 10px;box-shadow: 0 0 0 2px #000;border: 2px solid transparent"></textarea>
+        <div>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+        <div id="charNum" style="margin-left:80%; color:red;font-size:small;font-style:italic;margin-top:2px">*140 characters left</div>
+    </div>
+    
+
+    <div class="Grid-cell" style="margin-top:5px;margin-bottom:5px">
+        <div>
+            <span class="button-text follow-text">
+
+                @*<input type="submit" value="Create" class="btn btn-primary" />*@
+
+                <button class="EdgeButton EdgeButton--primary" type="submit" id="btnPostedTweet">
+                    Post New Tweet <i class="fab fa-twitter-square"></i>
+                </button>
+            </span>
+        </div>
+
+    </div>
+
+
+</form>

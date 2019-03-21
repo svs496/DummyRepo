@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="ProfileCanopy ProfileCanopy--withNav ProfileCanopy--large">
+    <div class="ProfileCanopy-inner">
+        <div class="ProfileCanopy-header u-bgUserColor">
+            <div class="ProfileCanopy-headerBg">
+                <img src="~/images/WelcomePage.jpg" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+
+    <script>
+
+        $(document).ready(function () {
+            console.log('@TempData["UpdateProfileMsg"]');
+             if ('@TempData["UpdateProfileMsg"]'.length > 0)
+                toastr.success('@TempData["UpdateProfileMsg"]');
+        });
+    </script>
+
+}

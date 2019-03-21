@@ -1,0 +1,19 @@
+﻿@{
+    //Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+   
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

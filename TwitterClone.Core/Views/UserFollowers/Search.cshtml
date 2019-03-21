@@ -1,0 +1,107 @@
+﻿
+@model IEnumerable<TwitterClone.Core.Models.ViewModels.UserTweetViewModel>
+
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+
+<div class="container" style="margin-top:5px;">
+    <form class="form-inline" asp-controller="UserFollowers" asp-action="Search" method="get">
+
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search members" name="searchString" style="width:300px;margin-right:5px">
+            <div class="input-group-append">
+                <button class="EdgeButton EdgeButton--primary" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+
+    <div id="divFollower">
+        @await Html.PartialAsync("_ManageFollowers", Model)
+    </div>
+
+
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+
+        $(document).ready(function () {
+             if ('@TempData["FollowerActionMsg"]'.length > 0)
+                toastr.success('@TempData["FollowerActionMsg"]');
+        });
+
+
+        function UnFollowUser(target) {
+            var userToFollowOrUnFollowId = target.dataset['followingusr'];
+            var targeturl = '@Url.Action("UnFollow", "UserFollowers")?id=' + userToFollowOrUnFollowId;
+
+            $.ajax({
+                url: targeturl,
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    if (response.success) {
+                        AjaxCallGetUpdateFollowers();
+                        toastr.success("Un Follow action successfull !");
+                        //window.location.reload(true);
+
+                    }
+                    else {
+                        toastr.error('Error ! Un Follow operation failed.');
+                    }
+                },
+                error: function (response) {
+
+                }
+            });
+        }
+
+        function FollowUser(target) {
+            var userToFollowOrUnFollowId = target.dataset['followingusr'];
+            var targeturl = '@Url.Action("Follow", "UserFollowers")?id=' + userToFollowOrUnFollowId;
+
+            $.ajax({
+                url: targeturl,
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    if (response.success) {
+                        AjaxCallGetUpdateFollowers();
+                        toastr.success("Follow action successfull !");
+                        //window.location.reload(true);
+
+                    }
+                    else {
+                        toastr.error('Error ! Follow operation failed.');
+                    }
+                },
+                error: function (xhr, textStatus, error) {
+                }
+            });
+        }
+
+        function AjaxCallGetUpdateFollowers() {
+            $.ajax({
+                url: '@Url.Action("UpdatedFollowers", "UserFollowers")',
+                type: 'GET',
+                cache: false
+            }).done(function (result) {
+                $('#divFollower').html(result);
+
+            });
+        }
+
+
+    </script>
+
+    }

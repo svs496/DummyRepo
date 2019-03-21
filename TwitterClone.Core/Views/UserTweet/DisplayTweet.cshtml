@@ -1,0 +1,319 @@
+﻿@model TwitterClone.Core.Models.ViewModels.UserTweetViewModel
+
+@{
+    ViewData["Title"] = "Tweets";
+}
+
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete tweet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this tweet?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="EdgeButton EdgeButton--tertiary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="EdgeButton EdgeButton--danger" id="btnContinueDelete"><i class="fa fa-trash"> Delete</i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="EditTweetModal" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <h4 class="modal-title">Edit tweet</h4>
+            </div>
+            <div class="modal-body" id="EditTweetModalContent">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="ProfileCanopy-navBar u-boxShadow" style="align-items:center">
+    <div class="Grid Grid--withGutter">
+        <div class="Grid-cell u-size2of3 u-lg-size3of4">
+            <div class="ProfileCanopy-nav">
+                <div class="ProfileNav" role="navigation" data-user-id="783214">
+                    <ul class="ProfileNav-list" style="text-align:center">
+                        <li class="ProfileNav-item ProfileNav-item--tweets is-active">
+                            <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav" data-nav="tweets"
+                               tabindex=0>
+                                <span class="ProfileNav-label">Tweets</span>
+                                <span class="ProfileNav-value" id="TweetCountWrapper">
+                                    @(ViewBag.OwnTweetCount == null ? 0 : ViewBag.OwnTweetCount)
+                                </span>
+                            </a>
+                        </li>
+                        <li class="ProfileNav-item ProfileNav-item--following">
+                            <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-openSignupDialog js-nonNavigable u-textUserColor"
+                               title="162 Following" data-nav="following">
+                                <span class="ProfileNav-label">Following</span>
+                                <span class="ProfileNav-value" data-count=162 data-is-compact="false">@Html.DisplayFor(model => model.FollowingCount)</span>
+                            </a>
+                        </li>
+                        <li class="ProfileNav-item ProfileNav-item--followers">
+                            <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-openSignupDialog js-nonNavigable u-textUserColor"
+                               title="60,604,994 Followers" data-nav="followers">
+                                <span class="ProfileNav-label">Followers</span>
+                                <span class="ProfileNav-value" data-count=60604994 data-is-compact="true">@Html.DisplayFor(model => model.FollowersCount)</span>
+                            </a>
+                        </li>
+                        <li class="ProfileNav-item ProfileNav-item--userActions u-floatRight u-textRight with-rightCaret ">
+
+                            <span class="button-text follow-text">
+                                <a asp-area="" asp-controller="UserFollowers" asp-action="Search" style="background-color:seagreen"
+                                   class="EdgeButton EdgeButton--primary EdgeButton--small"><i class="fas fa-user-plus"></i>&nbsp;Followers</a>
+                            </span>
+
+                        </li>
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="column" style="width:20%">
+        <div class="ProfileSidebar ProfileSidebar--withLeftAlignment">
+            <div class="ProfileHeaderCard">
+                <h1 class="ProfileHeaderCard-name">
+                    <a href="/Twitter"
+                       class="ProfileHeaderCard-nameLink u-textInheritColor js-nav">
+                        Welcome&nbsp;
+                        <span id="userFullName">@Html.DisplayFor(model => model.UserFullName)</span>
+                    </a>
+                    <span class="ProfileHeaderCard-badges">
+                        <a href="/help/verified" class="js-tooltip" target="_blank" title="Verified account" data-placement="right" rel="noopener">
+                            <i class="fas fa-user-cog"></i>
+                        </a>
+                    </span>
+                </h1>
+                <h2 class="ProfileHeaderCard-screenname u-inlineBlock u-dir" dir="ltr">
+                    <a class="ProfileHeaderCard-screennameLink u-linkComplex js-nav" href="/Twitter">
+                        <span class="username" dir="ltr">@@<b class="u-linkComplex-target">@Html.DisplayFor(model => model.TwitterHandle)</b></span>
+                    </a>
+                </h2>
+                <div class="ProfileHeaderCard-location ">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="ProfileHeaderCard-locationText u-dir" dir="ltr">
+                        @Html.DisplayFor(model => model.UserLocation)
+
+                    </span>
+                </div>
+                <div class="ProfileHeaderCard-joinDate">
+                    <i class="far fa-calendar-alt"></i>
+                    <span class="ProfileHeaderCard-joinDateText js-tooltip u-dir" dir="ltr">Joined @Html.DisplayFor(model => model.UserAccountCreationDate)</span>
+                </div>
+
+                <div class="ProfileHeaderCard-birthdate ">
+                    <i class="fas fa-birthday-cake"></i>
+                    <span class="ProfileHeaderCard-birthdateText u-dir" dir="ltr">
+                        <span class="js-tooltip" title="Public">
+                            @Html.DisplayFor(model => model.UserBirthDay)
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="column" style="width:55%;margin-top:10px">
+        <span class="text-danger TweetTextSize--jumbo font-weight-bold font-italic">Compose new Tweet</span>
+        <div id="ajaxPostNewTweet">
+            @await Html.PartialAsync("_CreateTweet", Model.TweetVM)
+        </div>
+
+        <div id="divPartialTweets">
+            @await Html.PartialAsync("_PostedTweets", Model.OwnTweets)
+        </div>
+    </div>
+    <div class="column" style="width:20%;margin-top:10px; text-align:left">
+        @*<span class="text-danger TweetTextSize--jumbo font-weight-bold font-italic">Member Updates</span>*@
+        <ul class="list-group" id="messagesList">
+            <li class="list-group-item list-group-item-action flex-column align-items-start active list-group-item-info">Real time updates</li>
+        </ul>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/tweetMessage.js"></script>
+    <script>
+
+        $('#field').keyup(function () {
+            var max = 140;
+            var len = $(this).val().length;
+            if (len >= max) {
+                $('#charNum').text('you have reached the limit');
+            } else {
+                var char = max - len;
+                $('#charNum').text(char + ' characters left');
+            }
+        });
+
+        $('#field2').keyup(function () {
+            debugger;
+            var max = 140;
+            var len = $(this).val().length;
+            if (len >= max) {
+                $('#charNum2').text('you have reached the limit');
+            } else {
+                var char = max - len;
+                $('#charNum2').text(char + ' characters left');
+            }
+        });
+
+
+        var deleteTweetId;
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);// Button that triggered the modal
+            deleteTweetId = button.data('whatever'); // Extract info from data-* attributes
+        });
+
+        $('#btnContinueDelete').click(function (event) {
+            var targeturl = '@Url.Action("Delete", "UserTweet")?id=' + deleteTweetId;
+            $.ajax({
+                url:  targeturl ,
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                //datatype: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        AjaxCallsForPostedTweets();
+                        toastr.success('Success ! Delete successful.');
+                    }
+                    else {
+                        toastr.error('Error ! Delete operation failed.');
+                    }
+
+                    $("#deleteModal").modal("hide");
+                },
+                error: function (response) {
+                    toastr.error('Error ! Delete operation failed.');
+                }
+            });
+
+        });
+
+      
+        var onComplete = function ($xhr) {
+            if ($xhr.responseJSON.success) {
+               
+                AjaxCallsForPostedTweets();
+                $('#field').val('');
+                $('#charNum').html('*140 characters left');
+                toastr.success('Congrats ! You added new tweet.');
+               
+
+            }
+            else {
+                toastr.error('Error during Insert');
+            }
+
+        }; // End
+
+        var onCompleteEdit = function ($xhr) {
+            if ($xhr.responseJSON.success) {
+               
+                toastr.success('Congrats ! Tweet is updated successfully..');
+                AjaxCallsForPostedTweets();
+                $("#EditTweetModal").modal("hide");
+            }
+            else {
+               toastr.error('Error in update');
+            }
+
+        }; // End
+
+
+
+        function AjaxCallsForPostedTweets() {
+            $.ajax({
+                url: '@Url.Action("PostedTweets")',
+                type: 'GET',
+                cache: false
+            }).done(function (result) {
+                $('#divPartialTweets').html(result);
+
+                $.ajax({
+                    url: '@Url.Action("GetTweetCount")',
+                    type: 'GET',
+                    dataType: "json",
+                    cache: false
+                }).done(function (result) {
+                    console.log(result);
+                    $('#TweetCountWrapper').html(result);
+                });
+            });
+        }
+
+
+        var FunctionEditTweet = function (id) {
+            window.toastr.clear();
+            var targeturl = '@Url.Action("ModalEdit", "UserTweet")?id=' + id;
+            $("#EditTweetModalContent").load(targeturl, function () {
+                $("#EditTweetModal").modal("show");
+            })
+        };
+  
+
+        //$(function () {
+        //    $("a[data-modal=editTweets]").on("click", function () {
+        //        $("#EditTweetModalContent").load(this.href, function () {
+        //            $("#EditTweetModal").modal({ keyboard: true }, "show");
+
+        //            $("#EditTweetForm").submit(function () {
+        //                if ($("#EditTweetForm").valid()) {
+        //                    $.ajax({
+        //                        url: this.action,
+        //                        type: this.method,
+        //                        data: $(this).serialize(),
+        //                        success: function (result) {
+        //                            if (result.success) {
+        //                                $("#EditTweetModal").modal("hide");
+        //                                location.reload(true);
+        //                            } else {
+        //                               toastr.error("The data was not updated.");
+        //                            }
+        //                        },
+        //                        error: function () {
+        //                            toastr.error("The web server had an error.");
+        //                        }
+        //                    });
+        //                    return false;
+        //                }
+        //            });
+        //        });
+        //        return false;
+        //    });
+        //});
+
+     
+
+    </script>
+
+}
